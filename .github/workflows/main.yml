@@ -17,5 +17,6 @@ jobs:
           node-version: 16.x
           cache: "pnpm"
       - run: ls -la
+      - run: cat pnpm-lock.yaml
       - run: pnpm install --frozen-lockfile
       - run: pnpm run lint && pnpm run build
