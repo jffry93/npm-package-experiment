@@ -10,7 +10,7 @@
     "release": "pnpm run build && changeset publish",
     "lint": "tsc",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build -o .out"
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.7",

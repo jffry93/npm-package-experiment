@@ -1,4 +1,5 @@
 name: CI
+
 on:
   push:
     branches:
@@ -19,3 +20,23 @@ jobs:
       - run: ls -la
       - run: pnpm install --frozen-lockfile
       - run: pnpm run lint && pnpm run build
+
+  deploy-storybook:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 9
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20.x
+          cache: "pnpm"
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run build-storybook
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@releases/v4
+        with:
+          branch: gh-pages  # The branch the action should deploy to.
+          folder: .out      # The folder the action should deploy.
