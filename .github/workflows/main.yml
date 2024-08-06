@@ -35,6 +35,22 @@ jobs:
           cache: "pnpm"
       - run: pnpm install --frozen-lockfile
       - run: pnpm run build-storybook
+      - name: Check if gh-pages exists
+        id: check_branch
+        run: |
+          if git ls-remote --heads origin gh-pages; then
+            echo "::set-output name=exists::yes"
+          else
+            echo "::set-output name=exists::no"
+          fi
+      - name: Create gh-pages if not exists
+        if: steps.check_branch.outputs.exists == 'no'
+        run: |
+          git checkout --orphan gh-pages
+          git reset --hard
+          git commit --allow-empty -m "Initializing gh-pages branch"
+          git push origin gh-pages
+          git checkout main
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@releases/v4
         with:
