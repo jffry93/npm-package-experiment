@@ -1,3 +1,7 @@
-export const add = (a: string, b: number) => {
-  return a + b
+import usePostsSelector from './src/hooks/posts-select'
+
+export {usePostsSelector}
+
+export const greaterThanThree = (num: number) => {
+  return num > 3;
 }
