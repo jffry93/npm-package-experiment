@@ -1,5 +1,15 @@
 # my-package-by-jz
 
+## 1.1.0
+
+### Minor Changes
+
+- Add module to test in custom wp block
+
+### Patch Changes
+
+- 1524663: test
+
 ## 1.0.1
 
 ### Patch Changes
