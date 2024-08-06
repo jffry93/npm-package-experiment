@@ -47,14 +47,6 @@ jobs:
           else
             echo "::set-output name=exists::no"
           fi
-      - name: Create gh-pages if not exists
-        if: steps.check_branch.outputs.exists == 'no'
-        run: |
-          git checkout --orphan gh-pages
-          git reset --hard
-          git commit --allow-empty -m "Initializing gh-pages branch"
-          git push origin gh-pages
-          git checkout -
       - name: Git status and log output
         run: |
           git status
